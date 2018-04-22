@@ -17,19 +17,19 @@ public class frames : MonoBehaviour
 
 	string line1;
 	string line2;
-	StreamReader theReader = new StreamReader("arabiandane.txt", Encoding.Default);
+	StreamReader theReader = new StreamReader(levels.levelname, Encoding.Default);
 	List<Vector3> posList = new List<Vector3>();
 
 	// Use this for initialization
 	void Start () 
 	{
 		QualitySettings.vSyncCount = 0;
-		Application.targetFrameRate = 30;
+		Application.targetFrameRate = 120;
 		line1 = theReader.ReadLine ();
 		while(line1 != null) 
 		{
 			string[] entries1 = line1.Split(' ');
-			pos = new Vector3(float.Parse(entries1[0]), float.Parse(entries1[1]));
+			pos = new Vector3(float.Parse(entries1[0])*1920/1500, (-1*float.Parse(entries1[1])+1000)*1080/1000);
 			posList.Add(pos);
 			line1 = theReader.ReadLine();	
 		}

@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System;
 using System.Text.RegularExpressions;
-
+using UnityEngine.SceneManagement;
 public class Login : MonoBehaviour {
 	public static string user;
 	public GameObject username;
@@ -57,7 +57,7 @@ public class Login : MonoBehaviour {
 		String txt = site.text;
 		if (txt.Contains ("login success")) {
 			user = uname;
-			Application.LoadLevel (sceneName);
+			SceneManager.LoadScene (sceneName);
 		} else {
 			invalidwarning.text = txt;
 		}

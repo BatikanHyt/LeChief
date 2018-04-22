@@ -3,11 +3,15 @@ using UnityEngine.UI;
 using System.Collections;
 using System;
 using System.Text.RegularExpressions;
+using UnityEngine.SceneManagement;
 public class mainScript : MonoBehaviour {
 
 	private string sceeneName = "Profile";
 	public void profileButton(){
 		Application.LoadLevel (sceeneName);
+	}
+	public void levelButton(){
+		SceneManager.LoadScene ("level Scene");
 	}
 
 	// Use this for initialization
