@@ -12,8 +12,8 @@ public class move : MonoBehaviour
     Finger index;
     Frame frame;
     GameObject ball;
-    int appWidth = 1024;
-    int appHeight = 768;
+    int appWidth = 1920;
+    int appHeight = 1080;
     // Use this for initialization
     void Start()
     {

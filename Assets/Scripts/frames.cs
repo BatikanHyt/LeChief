@@ -29,7 +29,7 @@ public class frames : MonoBehaviour
 		while(line1 != null) 
 		{
 			string[] entries1 = line1.Split(' ');
-			pos = new Vector3(float.Parse(entries1[0]), -1*float.Parse(entries1[1]));
+			pos = new Vector3(float.Parse(entries1[0])*1920/1500, (-1*float.Parse(entries1[1])+1000)*1080/1000);
 			posList.Add(pos);
 			line1 = theReader.ReadLine();	
 		}
