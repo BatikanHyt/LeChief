@@ -26,7 +26,7 @@ public class Login : MonoBehaviour {
 
 	}
 	public void singupButton(){
-		Application.LoadLevel (signScene);
+		SceneManager.LoadScene (signScene);
 	}
 	// Update is called once per frame
 	void Update () {

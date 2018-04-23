@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System;
 using System.Text.RegularExpressions;
-
+using UnityEngine.SceneManagement;
 public class register : MonoBehaviour {
 	//string createUserURL = "https://lechief.azurewebsites.net/register.php";
 	string createUserURL = "localhost/lechief/register.php";
@@ -64,7 +64,7 @@ public class register : MonoBehaviour {
 		if (site.text.Contains ("username exist")) {
 			Debug.Log (site.text);
 		} else {
-			Application.LoadLevel (sceneName);
+			SceneManager.LoadScene (sceneName);
 		}
     }
 }

@@ -8,7 +8,7 @@ public class mainScript : MonoBehaviour {
 
 	private string sceeneName = "Profile";
 	public void profileButton(){
-		Application.LoadLevel (sceeneName);
+		SceneManager.LoadScene (sceeneName);
 	}
 	public void levelButton(){
 		SceneManager.LoadScene ("level Scene");
