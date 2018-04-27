@@ -24,7 +24,7 @@ public class frames : MonoBehaviour
 	void Start () 
 	{
 		QualitySettings.vSyncCount = 0;
-		Application.targetFrameRate = 120;
+		Application.targetFrameRate = 240;
 		line1 = theReader.ReadLine ();
 		while(line1 != null) 
 		{
