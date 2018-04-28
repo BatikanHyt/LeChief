@@ -13,8 +13,9 @@ public class frames : MonoBehaviour
 	public float speed = 1;
 	public bool move = true;
 	float ElapsedTime = 0;
-    float FinishTime = 60f;
-
+    float FinishTime = 60f; 
+	public static float imageX;
+	public static float imageY;
 	string line1;
 	string line2;
 	StreamReader theReader = new StreamReader(levels.levelname, Encoding.Default);
@@ -24,7 +25,7 @@ public class frames : MonoBehaviour
 	void Start () 
 	{
 		QualitySettings.vSyncCount = 0;
-		Application.targetFrameRate = 120;
+		Application.targetFrameRate = 240;
 		line1 = theReader.ReadLine ();
 		while(line1 != null) 
 		{
@@ -42,6 +43,8 @@ public class frames : MonoBehaviour
 		{
 			endpos = posList[count];
 			float dist = Vector3.Distance(transform.position,endpos);
+			imageX = transform.position.x;
+			imageY = transform.position.y;
 			Vector3 velocity = Vector3.zero;
 			float smoothTime = 0.3F;
 			transform.position = Vector3.MoveTowards(transform.position,endpos, dist);  
