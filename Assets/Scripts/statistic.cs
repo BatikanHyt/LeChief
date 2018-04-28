@@ -28,6 +28,7 @@ public class statistic : MonoBehaviour {
 	}
     void Start () {
 		Username.text = Login.user;
+		StartCoroutine(stat(Login.user));
 		/*Debug.Log ("Splitter 1 is : " + splitter [1]);
 		/int.TryParse (splitter [1], out userstatistic);
 		int.TryParse (splitter [3], out userstatistic1);
@@ -39,7 +40,6 @@ public class statistic : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		StartCoroutine(stat(Login.user));
 		if (result > 0 && result < 25) {
 			status.text = "Newbie";
 		} else if (result > 25 && result < 100)
