@@ -13,6 +13,12 @@ public class levels : MonoBehaviour {
 	private int level1star;
 	private string levelUrl = "localhost/lechief/levels.php";
 	private string curLevel;
+	public void mainMenu(){
+		SceneManager.LoadScene ("main");
+	}
+	public void profile(){
+		SceneManager.LoadScene ("profile");
+	}
 	public void level1(){
 		levelname = "metronom/1in1.txt";
 		SceneManager.LoadScene ("drawer");
