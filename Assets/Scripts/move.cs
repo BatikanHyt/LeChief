@@ -34,7 +34,7 @@ public class move : MonoBehaviour
 			Hand leapHand = frame.Hands[h];
 			handlist.Add(leapHand);
 		}
-		{
+
 			index = frame.Hands[0].Fingers[(int)Finger.FingerType.TYPE_INDEX];
 			if (index.IsExtended)
 			{
@@ -60,15 +60,4 @@ public class move : MonoBehaviour
 
 
 		}
-	}
-	//public static float Distance(float x1, float x2, float y1, float y2)
-	//{
-
-	//	var temp1 = Mathf.Pow((x2 - x1), 2);
-	//	var temp2 = Mathf.Pow((y2 - y1), 2);
-	//	var result = Mathf.Sqrt(temp1 + temp2);
-
-	//	return result;
-	//}
-
 }
