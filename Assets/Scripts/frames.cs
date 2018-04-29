@@ -33,6 +33,7 @@ public class frames : MonoBehaviour
 			pos = new Vector3(float.Parse(entries1[0])*1024/1500, (-1*float.Parse(entries1[1])+1000)*768/1000);
 			posList.Add(pos);
 			line1 = theReader.ReadLine();	
+			line1 = theReader.ReadLine();		
 		}
 		transform.position = posList[0];
 		pos = posList[posList.Count - 1];
