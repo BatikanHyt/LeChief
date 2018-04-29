@@ -42,8 +42,10 @@ public class move : MonoBehaviour
 				Vector norm = iBox.NormalizePoint(fingPos, false);
 				float appX = norm.x * appWidth;
 				float appY = -1 * (1 - norm.y) * appHeight;
-				float finalResult = Distance (appX, appY, frames.imageX, frames.imageY);
-				if (finalResult < 250) {
+				//float finalResult = Distance (appX, appY, frames.imageX, frames.imageY);
+				float distanceX = appX - frames.imageX;
+				float distanceY = appY - frames.imageY;
+				if (Mathf.Abs(distanceX) < 50 && Mathf.Abs(distanceY) < 50) {
 					appX = frames.imageX;
 					appY = frames.imageY;
 				}
@@ -59,13 +61,14 @@ public class move : MonoBehaviour
 
 		}
 	}
-	public static float Distance(float x1, float x2, float y1, float y2)
-	{
+	//public static float Distance(float x1, float x2, float y1, float y2)
+	//{
 
-		var temp1 = Mathf.Pow((x2 - x1), 2);
-		var temp2 = Mathf.Pow((y2 - y1), 2);
-		var result = Mathf.Sqrt(temp1 + temp2);
+	//	var temp1 = Mathf.Pow((x2 - x1), 2);
+	//	var temp2 = Mathf.Pow((y2 - y1), 2);
+	//	var result = Mathf.Sqrt(temp1 + temp2);
 
-		return result;
-	}
+	//	return result;
+	//}
+
 }
