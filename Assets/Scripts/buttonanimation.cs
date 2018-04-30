@@ -1,27 +1,71 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
-using System;
-using System.Text.RegularExpressions;
-using UnityEngine.SceneManagement;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class buttonanimation : MonoBehaviour, IPointerEnterHandler, ISelectHandler {
-	public Text theText;
-	public void OnPointerEnter(PointerEventData eventData){
-		theText.color = Color.yellow;
+[RequireComponent (typeof(Button))]
+public class buttonanimation : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
+{
+
+	Text txt;
+	Color baseColor;
+	Button btn;
+	bool interactableDelay;
+
+	void Start ()
+	{
+		txt = GetComponentInChildren<Text>();
+		baseColor = txt.color;
+		btn = gameObject.GetComponent<Button> ();
+		interactableDelay = btn.interactable;
 	}
-	public void OnSelect(BaseEventData eventData){
-		theText.color = Color.black;
+
+	void Update ()
+	{
+		if (btn.interactable != interactableDelay) {
+			if (btn.interactable) {
+				txt.color = baseColor * btn.colors.normalColor * btn.colors.colorMultiplier;
+			} else {
+				txt.color = baseColor * btn.colors.disabledColor * btn.colors.colorMultiplier;
+			}
+		}
+		interactableDelay = btn.interactable;
 	}
-	public void OnPointerOver(PointerEventData eventData){
-		theText.color = Color.white;
+
+	public void OnPointerEnter (PointerEventData eventData)
+	{
+		if (btn.interactable) {
+			txt.color = baseColor * btn.colors.highlightedColor * btn.colors.colorMultiplier;
+		} else {
+			txt.color = baseColor * btn.colors.disabledColor * btn.colors.colorMultiplier;
+		}
 	}
-	public void OnPointerUp(PointerEventData eventData){
-		theText.color = Color.white;
+
+	public void OnPointerDown (PointerEventData eventData)
+	{
+		if (btn.interactable) {
+			txt.color = baseColor * btn.colors.pressedColor * btn.colors.colorMultiplier;
+		} else {
+			txt.color = baseColor * btn.colors.disabledColor * btn.colors.colorMultiplier;
+		}
 	}
-	public void OnPointerDown(PointerEventData eventData){
-		theText.color = Color.white;
+
+	public void OnPointerUp (PointerEventData eventData)
+	{
+		if (btn.interactable) {
+			txt.color = baseColor * btn.colors.highlightedColor * btn.colors.colorMultiplier;
+		} else {
+			txt.color = baseColor * btn.colors.disabledColor * btn.colors.colorMultiplier;
+		}
 	}
+
+	public void OnPointerExit (PointerEventData eventData)
+	{
+		if (btn.interactable) {
+			txt.color = baseColor * btn.colors.normalColor * btn.colors.colorMultiplier;
+		} else {
+			txt.color = baseColor * btn.colors.disabledColor * btn.colors.colorMultiplier;
+		}
+	}
+
 }

@@ -18,7 +18,7 @@ public class register : MonoBehaviour {
 	private string Fullname;
 	private string form;
 	private bool validEmail= false;
-	private string sceneName = "loginson";
+	private string sceneName = "login";
     // Use this for initialization
     void Start () {
 	
