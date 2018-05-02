@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using Leap;
 
-public class frames : MonoBehaviour 
+public class levelFrames : MonoBehaviour 
 {
 	
 	private Vector3 startpos;
@@ -27,7 +27,7 @@ public class frames : MonoBehaviour
     float appHeight = 768;
 	string line1;
 	string line2;
-	StreamReader theReader = new StreamReader(conductpage.songname, Encoding.Default);
+	StreamReader theReader = new StreamReader(levels.levelname, Encoding.Default);
 	List<Vector3> posList = new List<Vector3>();
 	GameObject ff;
 	GameObject t;

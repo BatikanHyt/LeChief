@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class conducting : MonoBehaviour {
 
 	public void redirectMain(){
-		SceneManager.LoadScene ("Main");
+		SceneManager.LoadScene ("Main2");
 	}
 	// Use this for initialization
 	void Start () {

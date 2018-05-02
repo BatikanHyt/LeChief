@@ -14,7 +14,7 @@ public class mainScript : MonoBehaviour {
 		SceneManager.LoadScene ("level Scene");
 	}
 	public void conductingButton(){
-		SceneManager.LoadScene ("frames");
+		SceneManager.LoadScene ("main2");
 	}
 
 	// Use this for initialization
