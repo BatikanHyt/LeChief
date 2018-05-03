@@ -7,9 +7,9 @@ using UnityEngine.SceneManagement;
 public class statistic : MonoBehaviour {
     public Text Username;
 	public Text Mail;
-    public Text Level1;
-    public Text Level2;
-    public Text status;
+	public Text Level1;
+	public Text Level2;
+	public Text status;
 	//public string uname = Login.user;
 	public static int level1acc;
 	public static int level2acc;
@@ -74,9 +74,11 @@ public class statistic : MonoBehaviour {
 		Level2.text = "Level"+splitter [2] + " Your Accuracy is : " + splitter [3];
 		Mail.text = splitter [4];
 		result = int.Parse (splitter [1]) + int.Parse (splitter [3]);
-		level1acc = int.Parse (splitter [1]);
+		GameObject.Find ("filler1").GetComponent<Image> ().fillAmount = int.Parse (splitter [1])/100;
+		//level1acc. = int.Parse (splitter [1]);
 		Debug.Log ("Accuracy 1: " + level1acc);
-		level2acc = int.Parse (splitter [3]);
+		GameObject.Find ("filler2").GetComponent<Image> ().fillAmount = int.Parse (splitter [3])/100;
+		//level2acc = int.Parse (splitter [3]);
 		Debug.Log ("Accuracy 2: " + level2acc);
 		Debug.Log ("result is : " + result);
     }
