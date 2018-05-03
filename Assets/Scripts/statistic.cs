@@ -4,12 +4,11 @@ using System.Collections;
 using System;
 using System.Text.RegularExpressions;
 using UnityEngine.SceneManagement;
+using TMPro;
 public class statistic : MonoBehaviour {
     public Text Username;
 	public Text Mail;
-	public Text Level1;
-	public Text Level2;
-	public Text status;
+	public  Text status;
 	//public string uname = Login.user;
 	public static int level1acc;
 	public static int level2acc;
@@ -29,13 +28,6 @@ public class statistic : MonoBehaviour {
     void Start () {
 		Username.text = Login.user;
 		StartCoroutine(stat(Login.user));
-		/*Debug.Log ("Splitter 1 is : " + splitter [1]);
-		/int.TryParse (splitter [1], out userstatistic);
-		int.TryParse (splitter [3], out userstatistic1);
-		result = userstatistic + userstatistic1;
-		Debug.Log (result);
-		accuracy [0] = userstatistic;
-		accuracy [1] = userstatistic1;*/
 	}
 	
 	// Update is called once per frame
@@ -53,16 +45,7 @@ public class statistic : MonoBehaviour {
     }
 
     IEnumerator stat(string uname)
-    {/*
-       WWWForm form = new WWWForm();
-		form.AddField("usernamePost", uname);
-        //form.AddField("passwordPost", pass);
-
-		WWW site = new WWW(statURL,form);
-        yield return site;
-        Debug.Log(site.text);
-*/
-
+    {
 		WWWForm form = new WWWForm();
 		form.AddField("usernamePost", uname);
 		
@@ -70,18 +53,21 @@ public class statistic : MonoBehaviour {
 		yield return site;
 		Debug.Log (site.text);
 		splitter = site.text.Split(char.Parse(","));
-		Level1.text = "Arabian Dance";
-		Level2.text = "Chinese Dance";
-		Mail.text = splitter [4];
-		result = int.Parse (splitter [1]) + int.Parse (splitter [3]);
-		GameObject.Find ("filler1").GetComponent<Image> ().fillAmount = float.Parse(splitter[1])/100;
-		GameObject.Find("Label1").GetComponent<Text>().text = splitter[1] + "%";
-		//level1acc. = int.Parse (splitter [1]);
-		Debug.Log ("Accuracy 1: " + level1acc);
-		GameObject.Find ("filler2").GetComponent<Image> ().fillAmount =float.Parse(splitter[3])/100;
-		GameObject.Find("Label2").GetComponent<Text>().text = splitter[3] + "%";
-		//level2acc = int.Parse (splitter [3]);
-		Debug.Log ("Accuracy 2: " + level2acc);
-		Debug.Log ("result is : " + result);
+		Mail.text = splitter [15];
+		result = int.Parse (splitter [10]) + int.Parse (splitter [11])+int.Parse (splitter [12])+int.Parse (splitter [13]);
+
+		GameObject.Find ("filler1").GetComponent<Image> ().fillAmount = float.Parse(splitter[10])/100;
+		GameObject.Find("Label1").GetComponent<Text>().text = splitter[10] + "%";
+
+		GameObject.Find ("filler2").GetComponent<Image> ().fillAmount =float.Parse(splitter[11])/100;
+		GameObject.Find("Label2").GetComponent<Text>().text = splitter[11] + "%";
+
+		GameObject.Find ("filler3").GetComponent<Image> ().fillAmount =float.Parse(splitter[12])/100;
+		GameObject.Find("Label3").GetComponent<Text>().text = splitter[12] + "%";
+
+		GameObject.Find ("filler4").GetComponent<Image> ().fillAmount =float.Parse(splitter[13])/100;
+		GameObject.Find("Label4").GetComponent<Text>().text = splitter[13] + "%";
+	
+
     }
 }
