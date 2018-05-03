@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 public class conductpage : MonoBehaviour {
 	public static string songname;
 	public static string musicUrl;
+	public void goMain(){
+		SceneManager.LoadScene ("Main");
+	}
 	public void russianDance(){
 		songname = "conducting/russiandance.txt";
 		musicUrl = "musics/RussianDance.wav";
