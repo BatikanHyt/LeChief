@@ -10,8 +10,13 @@ public class levels : MonoBehaviour {
 	public Button button2;
 	public Button button3;
 	public Button button4;
+	public Image level2lock;
+	public Image level3lock;
+	public Image level4lock;
 	private int level1star;
+	private string [] splitter;
 	private string levelUrl = "localhost/lechief/levels.php";
+	private string levelstatUrl = "localhost/lechief/statistic.php";
 	private string curLevel;
 	public void mainMenu(){
 		SceneManager.LoadScene ("main");
@@ -39,16 +44,7 @@ public class levels : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		StartCoroutine(currentProgress (Login.user));
-		Debug.Log ("Accuracy: " + statistic.level1acc);
-		if(statistic.level1acc<=25)
-			GameObject.Find("0star1").GetComponent<Image>().enabled = true;
-		else if (statistic.level1acc>25 && statistic.level1acc<=50)
-			GameObject.Find("1star1").GetComponent<Image>().enabled = true;
-		else if (statistic.level1acc>50 && statistic.level1acc<=75)
-			GameObject.Find("2star1").GetComponent<Image>().enabled = true;
-		else if (statistic.level1acc>75 && statistic.level1acc<100)
-			GameObject.Find("3star1").GetComponent<Image>().enabled = true;
-		
+		StartCoroutine (levelStat (Login.user));
 	}
 	
 	// Update is called once per frame
@@ -69,19 +65,45 @@ public class levels : MonoBehaviour {
 			button4.GetComponent<Button>().interactable = false;
 		} 
 		else if (curLevel.Contains ("2")) {
+			level2lock.enabled = false;
 			button2.GetComponent<Button>().interactable = true;
 			button3.GetComponent<Button>().interactable = false;
 			button4.GetComponent<Button>().interactable = false;
 		}
 		else if (curLevel.Contains ("3")) {
+			level2lock.enabled = false;
+			level3lock.enabled = false;
 			button2.GetComponent<Button>().interactable = true;
 			button3.GetComponent<Button>().interactable = true;
 			button4.GetComponent<Button>().interactable = false;
 		}
 		else if (curLevel.Contains ("4")) {
+			level2lock.enabled = false;
+			level3lock.enabled = false;
+			level4lock.enabled = false;
 			button2.GetComponent<Button>().interactable = true;
 			button3.GetComponent<Button>().interactable = true;
 			button4.GetComponent<Button>().interactable = true;
 		}
+	}
+	IEnumerator levelStat(string uname){
+		WWWForm form = new WWWForm ();
+		form.AddField ("usernamePost", uname);
+
+		WWW site = new WWW (levelstatUrl,form);
+		yield return site;
+		splitter = site.text.Split(char.Parse(","));
+		int lvl1stat = int.Parse(splitter [0]);
+
+		if(lvl1stat>0&&lvl1stat<=25)
+			GameObject.Find("0star1").GetComponent<Image>().enabled = true;
+		else if (lvl1stat>25 &&lvl1stat<=50)
+			GameObject.Find("1star1").GetComponent<Image>().enabled = true;
+		else if (lvl1stat>50 &&lvl1stat<=75)
+			GameObject.Find("2star1").GetComponent<Image>().enabled = true;
+		else if (lvl1stat>75 && lvl1stat<100)
+			GameObject.Find("3star1").GetComponent<Image>().enabled = true;
+		else
+			GameObject.Find("empty1").GetComponent<Image>().enabled = true;
 	}
 }

@@ -7,6 +7,7 @@ using Leap;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 //using System.Media;
+using TMPro;
 
 public class levelFrames : MonoBehaviour 
 {
@@ -51,12 +52,21 @@ public class levelFrames : MonoBehaviour
 	Text tScore;
 	int countBegining = 0;
 	int score = 1000;
+	//next page for statistic
+	//public UnityEngine.UI.Image statisticpage;
+	private GameObject subpage2;
+	private TextMeshProUGUI proScore;
+	private TextMeshProUGUI proAcc;
+
+
+
 
 
 	// Use this for initialization
 	void Start () 
 	{
-
+		foreach (Behaviour childCompnent in GameObject.Find("subpage2").GetComponentsInChildren<Behaviour>())
+			childCompnent.enabled = false;
 		QualitySettings.vSyncCount = 0;
 		Application.targetFrameRate = 30;
 		ff = GameObject.Find("ff");
@@ -169,7 +179,16 @@ public class levelFrames : MonoBehaviour
 				}
 			}
 		}else {
-			SceneManager.LoadScene("Level Scene");
+			Debug.Log ("Bitti");
+			foreach (Behaviour childCompnent in GameObject.Find("subpage2").GetComponentsInChildren<Behaviour>())
+				childCompnent.enabled = true;
+			proScore = GameObject.Find ("scoreShow").GetComponent<TextMeshProUGUI> ();
+			proAcc = GameObject.Find ("accShow").GetComponent<TextMeshProUGUI> ();
+			proScore.text = score.ToString ();
+			proAcc.text = accuracy.ToString () + "%";
+
+			//proScore.text = score;
+			//proAcc.text = accuracy;
 		}
 	
 
@@ -256,4 +275,5 @@ public class levelFrames : MonoBehaviour
 		return temp;
 
 	}
+	//IEnumerator statisticUpdater (int score, int accuracy, int level, string username);
 }
