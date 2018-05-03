@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 
 public class levelFrames : MonoBehaviour 
 {
+	public int accuracy;
 	//SoundPlayer player = new SoundPlayer(@"C:\Users\Usman\Documents\GitHub\LeChief\RussianDance.wav");
 	bool singing = false;
 	bool startPlaying = false;
@@ -49,7 +50,7 @@ public class levelFrames : MonoBehaviour
 	Frame frame;
 	Text tScore;
 	int countBegining = 0;
-	int score = 100;
+	int score = 1000;
 
 
 	// Use this for initialization
@@ -142,6 +143,7 @@ public class levelFrames : MonoBehaviour
 	}
 	void Draw()
 	{
+
 		if (move2)
 		{
 			endpos = posList[count];
@@ -157,6 +159,7 @@ public class levelFrames : MonoBehaviour
 					move2 = false;
 				count += 1;
 				score = calculateScore(ballX, ballY, imageX, imageY, score);
+				accuracy = CalculateAccuracy(score);
 				tScore.text = score.ToString();
 				print("Score is " + score);
 				countBegining = 1;
@@ -168,6 +171,7 @@ public class levelFrames : MonoBehaviour
 		}else {
 			SceneManager.LoadScene("Level Scene");
 		}
+	
 
 	}
 
@@ -206,34 +210,29 @@ public class levelFrames : MonoBehaviour
 
 		if (x1 != x2 && y1 != y2)
 		{
-			if (finalResult < 20)// popup good.
+			if (finalResult < 20 && score < 1000)// popup good.
 			{
 				score = score + 5;
 
 			}
-			else if (finalResult > 20 && finalResult < 30) // popup you are getting far from the line!
+			else if (finalResult > 50 && finalResult < 60 && score >0) // popup you are getting far from the line!
+			{
+				score = score - 3;
+
+			}
+			else if (finalResult > 60 && finalResult < 70 && score >0) // popup you are getting far from the line!!
+			{
+				score = score - 4;
+
+			}
+			else if(score >0) // popup you are too far from the line!!!
 			{
 				score = score - 5;
 
 			}
-			else if (finalResult > 30 && finalResult < 40) // popup you are getting far from the line!!
-			{
-				score = score - 10;
-
-			}
-			else if (finalResult > 40 && finalResult < 100) // popup you are far from the line!!!
-			{
-				score = score - 15;
-
-			}
-			else // popup you are too far from the line!!!
-			{
-				score = score - 20;
-
-			}
 
 		}
-		else
+		else if(score < 1000)
 		{
 			score = score + 10;
 
@@ -250,5 +249,11 @@ public class levelFrames : MonoBehaviour
 		float result = Mathf.Sqrt(temp1 + temp2);
 
 		return result;
+	}
+	public static int CalculateAccuracy(int score)
+	{
+		int temp = (score * 100) / 1000;
+		return temp;
+
 	}
 }
