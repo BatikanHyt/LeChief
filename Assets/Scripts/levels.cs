@@ -58,7 +58,7 @@ public class levels : MonoBehaviour {
 		WWW site = new WWW(levelUrl,form);
 		yield return site;
 		curLevel = site.text;
-		Debug.Log ("Current level is : " + curLevel);
+		Debug.Log ("Current level is : " + curLevel +"\n");
 		if (curLevel.Contains ("1")) {
 			button2.GetComponent<Button>().interactable = false;
 			button3.GetComponent<Button>().interactable = false;
@@ -94,7 +94,10 @@ public class levels : MonoBehaviour {
 		yield return site;
 		splitter = site.text.Split(char.Parse(","));
 		int lvl1stat = int.Parse(splitter [0]);
-
+		int lvl2stat = int.Parse (splitter [1]);
+		int lvl3stat = int.Parse (splitter [2]);
+		int lvl4stat = int.Parse (splitter [3]);
+		//for level 1
 		if(lvl1stat>0&&lvl1stat<=25)
 			GameObject.Find("0star1").GetComponent<Image>().enabled = true;
 		else if (lvl1stat>25 &&lvl1stat<=50)
@@ -105,5 +108,41 @@ public class levels : MonoBehaviour {
 			GameObject.Find("3star1").GetComponent<Image>().enabled = true;
 		else
 			GameObject.Find("empty1").GetComponent<Image>().enabled = true;
+
+		//for level 2
+		if(lvl2stat>0&&lvl2stat<=25)
+			GameObject.Find("0star2").GetComponent<Image>().enabled = true;
+		else if (lvl2stat>25 &&lvl2stat<=50)
+			GameObject.Find("1star2").GetComponent<Image>().enabled = true;
+		else if (lvl2stat>50 &&lvl2stat<=75)
+			GameObject.Find("2star2").GetComponent<Image>().enabled = true;
+		else if (lvl2stat>75 && lvl2stat<100)
+			GameObject.Find("3star2").GetComponent<Image>().enabled = true;
+		else
+			GameObject.Find("empty2").GetComponent<Image>().enabled = true;
+
+		//for level3
+		if(lvl3stat>0&&lvl3stat<=25)
+			GameObject.Find("0star3").GetComponent<Image>().enabled = true;
+		else if (lvl3stat>25 &&lvl3stat<=50)
+			GameObject.Find("1star3").GetComponent<Image>().enabled = true;
+		else if (lvl3stat>50 &&lvl3stat<=75)
+			GameObject.Find("2star3").GetComponent<Image>().enabled = true;
+		else if (lvl3stat>75 && lvl3stat<100)
+			GameObject.Find("3star3").GetComponent<Image>().enabled = true;
+		else
+			GameObject.Find("empty3").GetComponent<Image>().enabled = true;
+
+		//for level4
+		if(lvl4stat>0&&lvl4stat<=25)
+			GameObject.Find("0star4").GetComponent<Image>().enabled = true;
+		else if (lvl4stat>25 &&lvl4stat<=50)
+			GameObject.Find("1star4").GetComponent<Image>().enabled = true;
+		else if (lvl4stat>50 &&lvl4stat<=75)
+			GameObject.Find("2star4").GetComponent<Image>().enabled = true;
+		else if (lvl4stat>75 && lvl4stat<100)
+			GameObject.Find("3star4").GetComponent<Image>().enabled = true;
+		else
+			GameObject.Find("empty4").GetComponent<Image>().enabled = true;
 	}
 }
