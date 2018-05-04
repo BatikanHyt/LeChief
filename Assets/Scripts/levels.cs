@@ -18,6 +18,7 @@ public class levels : MonoBehaviour {
 	private string levelUrl = "localhost/lechief/levels.php";
 	private string levelstatUrl = "localhost/lechief/statistic.php";
 	private string curLevel;
+	public static string currentLevel;
 	public void mainMenu(){
 		SceneManager.LoadScene ("main");
 	}

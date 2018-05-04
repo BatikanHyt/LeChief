@@ -57,8 +57,8 @@ public class levelFrames : MonoBehaviour
 	private GameObject subpage2;
 	private TextMeshProUGUI proScore;
 	private TextMeshProUGUI proAcc;
-
-
+	private string updateLevelUrl = "localhost/lechief/updateLevels.php";
+	int lvl;
 
 
 
@@ -186,9 +186,17 @@ public class levelFrames : MonoBehaviour
 			proAcc = GameObject.Find ("accShow").GetComponent<TextMeshProUGUI> ();
 			proScore.text = score.ToString ();
 			proAcc.text = accuracy.ToString () + "%";
-
+			if (levels.levelname.Contains ("1in1"))
+				lvl = 1;
+			else if (levels.levelname.Contains ("2in2"))
+				lvl = 2;
+			else if (levels.levelname.Contains ("3in1"))
+				lvl = 3;
+			else if (levels.levelname.Contains ("33in2"))
+				lvl = 4;
+			StartCoroutine(statisticUpdater(score, accuracy, lvl, Login.user));
 			//proScore.text = score;
-			//proAcc.text = accuracy;
+			//proAcc.text = accuracy;*/
 		}
 	
 
@@ -275,5 +283,14 @@ public class levelFrames : MonoBehaviour
 		return temp;
 
 	}
-	//IEnumerator statisticUpdater (int score, int accuracy, int level, string username);
+	IEnumerator statisticUpdater (int score, int accuracy, int level, string username){
+		WWWForm form = new WWWForm();
+		form.AddField("usernamePost", username);
+		form.AddField("accuracyPost", accuracy);
+		form.AddField("levelPost", level);
+		form.AddField("scorePost", score);
+		WWW site = new WWW(updateLevelUrl,form);
+		yield return site;
+
+	}
 }
