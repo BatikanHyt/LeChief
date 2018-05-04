@@ -62,6 +62,7 @@ public class levelFrames : MonoBehaviour
 	private string levelUrl = "localhost/lechief/levels.php";
 	int lvl;
 	private int curLevel;
+	private bool once = true;
 
 
 
@@ -200,6 +201,9 @@ public class levelFrames : MonoBehaviour
 			else if (levels.levelname.Contains ("33in2"))
 				lvl = 4;
 			StartCoroutine(statisticUpdater(score, accuracy, lvl, Login.user));
+			if(once)
+			StartCoroutine (currentProgress (Login.user));
+			once = false;
 			if (curLevel == lvl  && curLevel != 4)
 				StartCoroutine (unlockLeveler (Login.user));
 			//proScore.text = score;

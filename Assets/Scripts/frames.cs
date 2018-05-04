@@ -51,6 +51,8 @@ public class frames : MonoBehaviour
     Text tScore;
     int countBegining = 0;
     int score = 100;
+	int once = 1;
+	int sayac = 0;
 
 	private GameObject subpage2;
 	private TextMeshProUGUI proScore;
@@ -148,6 +150,7 @@ public class frames : MonoBehaviour
 			ballX = ball.transform.position.x;
 			ballY = ball.transform.position.y;
 			if ((ballX == imageX && ballY == imageY) || countBegining == 1) {
+				sayac++;
 				Vector3 velocity = Vector3.zero;
 				float smoothTime = 0.3F;
 				ff.transform.position = Vector3.MoveTowards (ff.transform.position, endpos, dist);
@@ -159,7 +162,8 @@ public class frames : MonoBehaviour
 				tScore.text = score.ToString ();
 				print ("Score is " + score);
 				countBegining = 1;
-				if (Time.time - startTime > waitFor) {
+				Debug.Log ("sayac: "+sayac);
+				if (sayac > 30) {
 					Draw_t ();
 					singing = true;
 				}
@@ -257,5 +261,8 @@ public class frames : MonoBehaviour
 		int temp = (score * 100) / 1000;
 		return temp;
 
+	}
+	IEnumerator waitit(){
+		yield return new WaitForSeconds (3);
 	}
 }
