@@ -16,7 +16,12 @@ public class mainScript : MonoBehaviour {
 	public void conductingButton(){
 		SceneManager.LoadScene ("main2");
 	}
-
+	public void goSettings(){
+		SceneManager.LoadScene ("Settings");
+	}
+	public void quit(){
+		Application.Quit ();
+	}
 	// Use this for initialization
 	void Start () {
 	
