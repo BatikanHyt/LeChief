@@ -18,7 +18,7 @@ public class levels : MonoBehaviour {
 	private string levelUrl = "localhost/lechief/levels.php";
 	private string levelstatUrl = "localhost/lechief/statistic.php";
 	private string curLevel;
-	public static string currentLevel;
+	public static int currentLevel;
 	public void mainMenu(){
 		SceneManager.LoadScene ("main");
 	}
@@ -61,17 +61,20 @@ public class levels : MonoBehaviour {
 		curLevel = site.text;
 		Debug.Log ("Current level is : " + curLevel +"\n");
 		if (curLevel.Contains ("1")) {
+			currentLevel = 1;
 			button2.GetComponent<Button>().interactable = false;
 			button3.GetComponent<Button>().interactable = false;
 			button4.GetComponent<Button>().interactable = false;
 		} 
 		else if (curLevel.Contains ("2")) {
+			currentLevel = 2;
 			level2lock.enabled = false;
 			button2.GetComponent<Button>().interactable = true;
 			button3.GetComponent<Button>().interactable = false;
 			button4.GetComponent<Button>().interactable = false;
 		}
 		else if (curLevel.Contains ("3")) {
+			currentLevel = 3;
 			level2lock.enabled = false;
 			level3lock.enabled = false;
 			button2.GetComponent<Button>().interactable = true;
@@ -79,6 +82,7 @@ public class levels : MonoBehaviour {
 			button4.GetComponent<Button>().interactable = false;
 		}
 		else if (curLevel.Contains ("4")) {
+			currentLevel = 4;
 			level2lock.enabled = false;
 			level3lock.enabled = false;
 			level4lock.enabled = false;
