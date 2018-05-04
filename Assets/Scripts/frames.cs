@@ -6,7 +6,8 @@ using System.IO;
 using Leap;
 using UnityEngine.UI;
 using System.Media;
-
+using TMPro;
+using UnityEngine.SceneManagement;
 public class frames : MonoBehaviour 
 {	
 	int accuracy;
@@ -51,11 +52,19 @@ public class frames : MonoBehaviour
     int countBegining = 0;
     int score = 100;
 
+	private GameObject subpage2;
+	private TextMeshProUGUI proScore;
+	private TextMeshProUGUI proAcc;
+	public void redirectToConductingPage(){
+		SceneManager.LoadScene ("Main2");
+	}
 
     // Use this for initialization
     void Start () 
 	{
-        
+		foreach (Behaviour childCompnent in GameObject.Find("subpage2").GetComponentsInChildren<Behaviour>())
+			childCompnent.enabled = false;
+		Debug.Log (conductpage.songname);
 		QualitySettings.vSyncCount = 0;
 		Application.targetFrameRate = 30;
 		ff = GameObject.Find("ff");
@@ -72,7 +81,8 @@ public class frames : MonoBehaviour
 			string[] entries1 = line1.Split(' ');
 			pos = new Vector3(float.Parse(entries1[0]) - appWidth / 4, float.Parse(entries1[1]) - appHeight / 2) ;
 			posList.Add(pos);
-			line1 = theReader.ReadLine();	
+			line1 = theReader.ReadLine();
+			line1 = theReader.ReadLine();
 		}
 		ff.transform.position = posList[0];
 		t.transform.position = ff.transform.position;
@@ -155,7 +165,15 @@ public class frames : MonoBehaviour
 				}
                     
 			}
-		} 
+		} else {
+			Debug.Log ("Bitti");
+			foreach (Behaviour childCompnent in GameObject.Find("subpage2").GetComponentsInChildren<Behaviour>())
+				childCompnent.enabled = true;
+			proScore = GameObject.Find ("scoreShow").GetComponent<TextMeshProUGUI> ();
+			proAcc = GameObject.Find ("accShow").GetComponent<TextMeshProUGUI> ();
+			proScore.text = score.ToString ();
+			proAcc.text = accuracy.ToString () + "%";
+		}
     }
 
    

@@ -32,13 +32,13 @@ public class statistic : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (result > 0 && result < 25) {
+		if (result >= 0 && result < 100) {
 			status.text = "Newbie";
-		} else if (result > 25 && result < 100)
+		} else if (result >= 100 && result < 200)
 			status.text = "Beginner";
-		else if (result > 100 && result < 200)
+		else if (result >= 200 && result < 300)
 			status.text = "ıntermediate";
-		else if (result > 200 && result < 300)
+		else if (result >= 300 && result <= 400)
 			status.text = "Veteran";
 		else 
 			status.text = "";

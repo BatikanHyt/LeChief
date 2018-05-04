@@ -7,6 +7,7 @@ using Leap;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 //using System.Media;
+using TMPro;
 
 public class levelFrames : MonoBehaviour 
 {
@@ -51,12 +52,21 @@ public class levelFrames : MonoBehaviour
 	Text tScore;
 	int countBegining = 0;
 	int score = 1000;
+	//next page for statistic
+	//public UnityEngine.UI.Image statisticpage;
+	private GameObject subpage2;
+	private TextMeshProUGUI proScore;
+	private TextMeshProUGUI proAcc;
+	private string updateLevelUrl = "localhost/lechief/updateLevels.php";
+	int lvl;
+
 
 
 	// Use this for initialization
 	void Start () 
 	{
-
+		foreach (Behaviour childCompnent in GameObject.Find("subpage2").GetComponentsInChildren<Behaviour>())
+			childCompnent.enabled = false;
 		QualitySettings.vSyncCount = 0;
 		Application.targetFrameRate = 30;
 		ff = GameObject.Find("ff");
@@ -169,7 +179,24 @@ public class levelFrames : MonoBehaviour
 				}
 			}
 		}else {
-			SceneManager.LoadScene("Level Scene");
+			Debug.Log ("Bitti");
+			foreach (Behaviour childCompnent in GameObject.Find("subpage2").GetComponentsInChildren<Behaviour>())
+				childCompnent.enabled = true;
+			proScore = GameObject.Find ("scoreShow").GetComponent<TextMeshProUGUI> ();
+			proAcc = GameObject.Find ("accShow").GetComponent<TextMeshProUGUI> ();
+			proScore.text = score.ToString ();
+			proAcc.text = accuracy.ToString () + "%";
+			if (levels.levelname.Contains ("1in1"))
+				lvl = 1;
+			else if (levels.levelname.Contains ("2in2"))
+				lvl = 2;
+			else if (levels.levelname.Contains ("3in1"))
+				lvl = 3;
+			else if (levels.levelname.Contains ("33in2"))
+				lvl = 4;
+			StartCoroutine(statisticUpdater(score, accuracy, lvl, Login.user));
+			//proScore.text = score;
+			//proAcc.text = accuracy;*/
 		}
 	
 
@@ -254,6 +281,16 @@ public class levelFrames : MonoBehaviour
 	{
 		int temp = (score * 100) / 1000;
 		return temp;
+
+	}
+	IEnumerator statisticUpdater (int score, int accuracy, int level, string username){
+		WWWForm form = new WWWForm();
+		form.AddField("usernamePost", username);
+		form.AddField("accuracyPost", accuracy);
+		form.AddField("levelPost", level);
+		form.AddField("scorePost", score);
+		WWW site = new WWW(updateLevelUrl,form);
+		yield return site;
 
 	}
 }
