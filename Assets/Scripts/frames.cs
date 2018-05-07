@@ -142,7 +142,7 @@ public class frames : MonoBehaviour
     }
     void Draw()
     {
-		if (move2) {
+		if(move2) {
 			endpos = posList [count];
 			float dist = Vector3.Distance (ff.transform.position, endpos);
 			ballX = ball.transform.position.x;
@@ -160,12 +160,13 @@ public class frames : MonoBehaviour
 				print ("Score is " + score);
 				countBegining = 1;
 				if (Time.time - startTime > waitFor) {
+					print()
 					Draw_t ();
 					singing = true;
 				}
                     
 			}
-		} else {
+		} 
 			Debug.Log ("Bitti");
 			foreach (Behaviour childCompnent in GameObject.Find("subpage2").GetComponentsInChildren<Behaviour>())
 				childCompnent.enabled = true;
@@ -173,14 +174,14 @@ public class frames : MonoBehaviour
 			proAcc = GameObject.Find ("accShow").GetComponent<TextMeshProUGUI> ();
 			proScore.text = score.ToString ();
 			proAcc.text = accuracy.ToString () + "%";
-		}
+
     }
 
    
 
 	void Draw_t ()
 	{
-//		yield return new WaitForSeconds (1.5f);
+		yield return new WaitForSeconds (1.5f);
 		oldS = posList[count2];
 		float dist = Vector3.Distance(t.transform.position,oldS);
 		Vector3 velocity = Vector3.zero;
@@ -198,9 +199,12 @@ public class frames : MonoBehaviour
             startPlaying = true;
 			accuracy = CalculateAccuracy(score);
         }
-        Hand();
+		Draw();
+		Hand();
+
+       
         //if(moveCheck)
-            Draw();
+       
         
 	}
     public static int calculateScore(float x1, float y1, float x2, float y2, int score)
