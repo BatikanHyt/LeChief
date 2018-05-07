@@ -58,7 +58,11 @@ public class levelFrames : MonoBehaviour
 	private TextMeshProUGUI proScore;
 	private TextMeshProUGUI proAcc;
 	private string updateLevelUrl = "localhost/lechief/updateLevels.php";
+	private string unlockLevelUrl = "localhost/lechief/unlockLevel.php";
+	private string levelUrl = "localhost/lechief/levels.php";
 	int lvl;
+	private int curLevel;
+	private bool once = true;
 
 
 
@@ -67,6 +71,8 @@ public class levelFrames : MonoBehaviour
 	{
 		foreach (Behaviour childCompnent in GameObject.Find("subpage2").GetComponentsInChildren<Behaviour>())
 			childCompnent.enabled = false;
+		StartCoroutine (currentProgress (Login.user));
+		Debug.Log ("hey current level is : " + curLevel);
 		QualitySettings.vSyncCount = 0;
 		Application.targetFrameRate = 30;
 		ff = GameObject.Find("ff");
@@ -195,6 +201,11 @@ public class levelFrames : MonoBehaviour
 			else if (levels.levelname.Contains ("33in2"))
 				lvl = 4;
 			StartCoroutine(statisticUpdater(score, accuracy, lvl, Login.user));
+			if(once)
+			StartCoroutine (currentProgress (Login.user));
+			once = false;
+			if (curLevel == lvl  && curLevel != 4)
+				StartCoroutine (unlockLeveler (Login.user));
 			//proScore.text = score;
 			//proAcc.text = accuracy;*/
 		}
@@ -291,6 +302,25 @@ public class levelFrames : MonoBehaviour
 		form.AddField("scorePost", score);
 		WWW site = new WWW(updateLevelUrl,form);
 		yield return site;
+		Debug.Log (site.text);
 
+	}
+	//update the level
+	IEnumerator unlockLeveler(string username){
+		WWWForm form = new WWWForm();
+		form.AddField("usernamePost", username);
+		WWW site = new WWW (unlockLevelUrl, form);
+		yield return site;
+		Debug.Log (site.text);
+	}
+
+	//getting current level
+	IEnumerator currentProgress(string uname){
+		WWWForm form = new WWWForm ();
+		form.AddField ("usernamePost", uname);
+
+		WWW site = new WWW (levelUrl, form);
+		yield return site;
+		curLevel = int.Parse(site.text);
 	}
 }
