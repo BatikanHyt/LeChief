@@ -75,12 +75,13 @@ public class frames : MonoBehaviour
 		Debug.Log (conductpage.songname);
 		if (conductpage.songname.Contains ("arabian"))
 			lvl = 11;
-		else if (conductpage.songname.Contains ("China"))
+		else if (conductpage.songname.Contains ("china"))
 			lvl = 12;
 		else if (conductpage.songname.Contains ("readpipes"))
 			lvl = 13;
 		else if (conductpage.songname.Contains ("minia"))
 			lvl = 14;
+		Debug.Log ("asdddddddddddddddddddddddddddddddddddddddddddddddddd level: " + lvl);
 		//else if (conductpage.songname.Contains ("russ"))
 		//	lvl = 15;
 		QualitySettings.vSyncCount = 0;
@@ -198,7 +199,7 @@ public class frames : MonoBehaviour
 			if (once) {
 				accuracy = 100 * goodCount / lineCount;
 				proAcc.text = accuracy.ToString () + "%";
-				StartCoroutine (statisticUpdater (score, accuracy, lvl, Login.user));
+				StartCoroutine (statisticUpdater (5, accuracy, lvl, Login.user));
 				once = false;
 			}
 		}
