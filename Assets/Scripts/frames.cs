@@ -53,6 +53,8 @@ public class frames : MonoBehaviour
     int score = 100;
 	int once = 1;
 	int sayac = 0;
+	int lvl;
+	private string updateLevelUrl = "localhost/lechief/updateLevels.php";
 
 	private GameObject subpage2;
 	private TextMeshProUGUI proScore;
@@ -177,6 +179,17 @@ public class frames : MonoBehaviour
 			proAcc = GameObject.Find ("accShow").GetComponent<TextMeshProUGUI> ();
 			proScore.text = score.ToString ();
 			proAcc.text = accuracy.ToString () + "%";
+			if (conductpage.songname.Contains ("arabian"))
+				lvl = 11;
+			else if (conductpage.songname.Contains ("China"))
+				lvl = 12;
+			else if (conductpage.songname.Contains ("readpipes"))
+				lvl = 13;
+			else if (conductpage.songname.Contains ("minia"))
+				lvl = 14;
+			else if (conductpage.songname.Contains ("russ"))
+				lvl = 15;
+			StartCoroutine(statisticUpdater(score, accuracy, lvl, Login.user));
 		}
     }
 
@@ -264,5 +277,16 @@ public class frames : MonoBehaviour
 	}
 	IEnumerator waitit(){
 		yield return new WaitForSeconds (3);
+	}
+	IEnumerator statisticUpdater (int score, int accuracy, int level, string username){
+		WWWForm form = new WWWForm();
+		form.AddField("usernamePost", username);
+		form.AddField("accuracyPost", accuracy);
+		form.AddField("levelPost", level);
+		form.AddField("scorePost", score);
+		WWW site = new WWW(updateLevelUrl,form);
+		yield return site;
+		Debug.Log (site.text);
+
 	}
 }

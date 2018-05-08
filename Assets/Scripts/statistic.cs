@@ -68,6 +68,8 @@ public class statistic : MonoBehaviour {
 		GameObject.Find ("filler4").GetComponent<Image> ().fillAmount =float.Parse(splitter[13])/100;
 		GameObject.Find("Label4").GetComponent<Text>().text = splitter[13] + "%";
 	
+		GameObject.Find ("filler5").GetComponent<Image> ().fillAmount =float.Parse(splitter[14])/100;
+		GameObject.Find("Label5").GetComponent<Text>().text = splitter[14] + "%";
 
     }
 }

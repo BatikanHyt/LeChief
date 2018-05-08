@@ -11,21 +11,29 @@ public class register : MonoBehaviour {
 	public GameObject password;
 	public GameObject email;
 	public GameObject fullname;
-
+	public Text invalidEmail;
+	public  const string MatchEmailPattern =
+		@"^(([\w-]+\.)+[\w-]+|([a-zA-Z]{1}|[\w-]{2,}))@"
+		+ @"((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\."
+		+ @"([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+		+ @"([a-zA-Z]+[\w-]+\.)+[a-zA-Z]{2,4})$";
 	private string Username;
 	private string Password;
 	private string Email;
 	private string Fullname;
 	private string form;
-	private bool validEmail= false;
 	private string sceneName = "login";
+
     // Use this for initialization
     void Start () {
 	
 	}
 	public void RegisterButton(){
+		if(Regex.IsMatch(Email, MatchEmailPattern))
 		StartCoroutine(CreateUser (Username, Password, Email, Fullname));
-
+		else
+			invalidEmail.text = "Please enter valid e-mail";
+			
 	}
 	// Update is called once per frame
 	void Update () {
