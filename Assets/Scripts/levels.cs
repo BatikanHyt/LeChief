@@ -218,7 +218,7 @@ public class levels : MonoBehaviour {
 			GameObject.Find("1star1").GetComponent<Image>().enabled = true;
 		else if (lvl1stat>50 &&lvl1stat<=75)
 			GameObject.Find("2star1").GetComponent<Image>().enabled = true;
-		else if (lvl1stat>75 && lvl1stat<100)
+		else if (lvl1stat>75 && lvl1stat<=100)
 			GameObject.Find("3star1").GetComponent<Image>().enabled = true;
 		else
 			GameObject.Find("empty1").GetComponent<Image>().enabled = true;
@@ -230,7 +230,7 @@ public class levels : MonoBehaviour {
 			GameObject.Find("1star2").GetComponent<Image>().enabled = true;
 		else if (lvl2stat>50 &&lvl2stat<=75)
 			GameObject.Find("2star2").GetComponent<Image>().enabled = true;
-		else if (lvl2stat>75 && lvl2stat<100)
+		else if (lvl2stat>75 && lvl2stat<=100)
 			GameObject.Find("3star2").GetComponent<Image>().enabled = true;
 		else
 			GameObject.Find("empty2").GetComponent<Image>().enabled = true;
@@ -242,7 +242,7 @@ public class levels : MonoBehaviour {
 			GameObject.Find("1star3").GetComponent<Image>().enabled = true;
 		else if (lvl3stat>50 &&lvl3stat<=75)
 			GameObject.Find("2star3").GetComponent<Image>().enabled = true;
-		else if (lvl3stat>75 && lvl3stat<100)
+		else if (lvl3stat>75 && lvl3stat<=100)
 			GameObject.Find("3star3").GetComponent<Image>().enabled = true;
 		else
 			GameObject.Find("empty3").GetComponent<Image>().enabled = true;
@@ -254,7 +254,7 @@ public class levels : MonoBehaviour {
 			GameObject.Find("1star4").GetComponent<Image>().enabled = true;
 		else if (lvl4stat>50 &&lvl4stat<=75)
 			GameObject.Find("2star4").GetComponent<Image>().enabled = true;
-		else if (lvl4stat>75 && lvl4stat<100)
+		else if (lvl4stat>75 && lvl4stat<=100)
 			GameObject.Find("3star4").GetComponent<Image>().enabled = true;
 		else
 			GameObject.Find("empty4").GetComponent<Image>().enabled = true;
@@ -266,7 +266,7 @@ public class levels : MonoBehaviour {
 			GameObject.Find("1star5").GetComponent<Image>().enabled = true;
 		else if (lvl5stat>50 &&lvl5stat<=75)
 			GameObject.Find("2star5").GetComponent<Image>().enabled = true;
-		else if (lvl5stat>75 && lvl5stat<100)
+		else if (lvl5stat>75 && lvl5stat<=100)
 			GameObject.Find("3star5").GetComponent<Image>().enabled = true;
 		else
 			GameObject.Find("empty5").GetComponent<Image>().enabled = true;
@@ -278,7 +278,7 @@ public class levels : MonoBehaviour {
 			GameObject.Find("1star6").GetComponent<Image>().enabled = true;
 		else if (lvl6stat>50 &&lvl6stat<=75)
 			GameObject.Find("2star6").GetComponent<Image>().enabled = true;
-		else if (lvl6stat>75 && lvl6stat<100)
+		else if (lvl6stat>75 && lvl6stat<=100)
 			GameObject.Find("3star6").GetComponent<Image>().enabled = true;
 		else
 			GameObject.Find("empty6").GetComponent<Image>().enabled = true;
@@ -290,7 +290,7 @@ public class levels : MonoBehaviour {
 			GameObject.Find("1star7").GetComponent<Image>().enabled = true;
 		else if (lvl7stat>50 &&lvl7stat<=75)
 			GameObject.Find("2star7").GetComponent<Image>().enabled = true;
-		else if (lvl7stat>75 && lvl7stat<100)
+		else if (lvl7stat>75 && lvl7stat<=100)
 			GameObject.Find("3star7").GetComponent<Image>().enabled = true;
 		else
 			GameObject.Find("empty7").GetComponent<Image>().enabled = true;
@@ -302,7 +302,7 @@ public class levels : MonoBehaviour {
 			GameObject.Find("1star8").GetComponent<Image>().enabled = true;
 		else if (lvl8stat>50 &&lvl8stat<=75)
 			GameObject.Find("2star8").GetComponent<Image>().enabled = true;
-		else if (lvl8stat>75 && lvl8stat<100)
+		else if (lvl8stat>75 && lvl8stat<=100)
 			GameObject.Find("3star8").GetComponent<Image>().enabled = true;
 		else
 			GameObject.Find("empty8").GetComponent<Image>().enabled = true;
@@ -314,7 +314,7 @@ public class levels : MonoBehaviour {
 			GameObject.Find("1star9").GetComponent<Image>().enabled = true;
 		else if (lvl9stat>50 &&lvl9stat<=75)
 			GameObject.Find("2star4").GetComponent<Image>().enabled = true;
-		else if (lvl9stat>75 && lvl9stat<100)
+		else if (lvl9stat>75 && lvl9stat<=100)
 			GameObject.Find("3star9").GetComponent<Image>().enabled = true;
 		else
 			GameObject.Find("empty9").GetComponent<Image>().enabled = true;

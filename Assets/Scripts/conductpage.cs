@@ -10,11 +10,11 @@ public class conductpage : MonoBehaviour {
 	public void goMain(){
 		SceneManager.LoadScene ("Main");
 	}
-	public void russianDance(){
+	/*public void russianDance(){
 		songname = "conducting/russiandance.txt";
 		musicUrl = "musics/RussianDance.wav";
 		SceneManager.LoadScene ("frames");
-	}
+	}*/
 	public void arabianDance(){
 		songname = "conducting/arabiandane.txt";
 		musicUrl = "musics/ArabianDance.wav";
@@ -33,12 +33,11 @@ public class conductpage : MonoBehaviour {
 	}
 	public void miniatureOverture(){
 		songname = "conducting/miniatureoverture.txt";
-		musicUrl = "musics/ArbianDance.wav";
+		musicUrl = "musics/Miniature.wav";
 		SceneManager.LoadScene ("frames");
 	}
 	// Use this for initialization
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame

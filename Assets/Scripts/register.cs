@@ -28,6 +28,9 @@ public class register : MonoBehaviour {
     void Start () {
 	
 	}
+	public void backLogin(){
+		SceneManager.LoadScene ("Login");
+	}
 	public void RegisterButton(){
 		if(Regex.IsMatch(Email, MatchEmailPattern))
 		StartCoroutine(CreateUser (Username, Password, Email, Fullname));

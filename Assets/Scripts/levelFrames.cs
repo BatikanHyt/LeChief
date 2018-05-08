@@ -36,9 +36,9 @@ public class levelFrames : MonoBehaviour
 	public float tim;
 	float startTime = 0;
 	float waitFor = 1.2f;
-	bool timerStart = false;
-	float ElapsedTime = 0;
-	float FinishTime = 60f;
+	//bool timerStart = false;
+	//float ElapsedTime = 0;
+	//float FinishTime = 60f;
 	float appWidth = 1024;
 	float appHeight = 768;
 	StreamReader theReader = new StreamReader(levels.levelname, Encoding.Default);
@@ -60,10 +60,12 @@ public class levelFrames : MonoBehaviour
 	private string updateLevelUrl = "localhost/lechief/updateLevels.php";
 	private string unlockLevelUrl = "localhost/lechief/unlockLevel.php";
 	private string levelUrl = "localhost/lechief/levels.php";
+	private string statisticURL = "localhost/lechief/statistic.php";
 	int lvl;
 	private int curLevel;
+	int curLevelScore;
 	private bool once = true;
-
+	private string [] splitter;
 
 
 	// Use this for initialization
@@ -73,6 +75,15 @@ public class levelFrames : MonoBehaviour
 			childCompnent.enabled = false;
 		StartCoroutine (currentProgress (Login.user));
 		Debug.Log ("hey current level is : " + curLevel);
+		if (levels.levelname.Contains ("1in1"))
+			lvl = 1;
+		else if (levels.levelname.Contains ("2in2"))
+			lvl = 2;
+		else if (levels.levelname.Contains ("3in1"))
+			lvl = 3;
+		else if (levels.levelname.Contains ("33in2"))
+			lvl = 4;
+		StartCoroutine(stat(Login.user,lvl));
 		QualitySettings.vSyncCount = 0;
 		Application.targetFrameRate = 30;
 		ff = GameObject.Find("ff");
@@ -137,7 +148,7 @@ public class levelFrames : MonoBehaviour
 				//ballX = imageX;
 				//ballY = imageY;
 				//ball.transform.position = t.transform.position;
-				ball.transform.parent = t.transform;
+				//ball.transform.parent = t.transform;
 			}
 			Vector3 fPos = new Vector3(appX, appY);
 			Plane objPlane = new Plane(Camera.main.transform.forward * -1, ball.transform.position);
@@ -169,7 +180,7 @@ public class levelFrames : MonoBehaviour
 			if ((ballX == imageX && ballY == imageY) || countBegining == 1)
 			{
 				Vector3 velocity = Vector3.zero;
-				float smoothTime = 0.3F;
+				//float smoothTime = 0.3F;
 				ff.transform.position = Vector3.MoveTowards(ff.transform.position, endpos, dist);
 				if (ff.transform.position == pos)
 					move2 = false;
@@ -177,7 +188,6 @@ public class levelFrames : MonoBehaviour
 				score = calculateScore(ballX, ballY, imageX, imageY, score);
 				accuracy = CalculateAccuracy(score);
 				tScore.text = score.ToString();
-				print("Score is " + score);
 				countBegining = 1;
 				if (Time.time - startTime > waitFor) {
 					Draw_t ();
@@ -192,22 +202,18 @@ public class levelFrames : MonoBehaviour
 			proAcc = GameObject.Find ("accShow").GetComponent<TextMeshProUGUI> ();
 			proScore.text = score.ToString ();
 			proAcc.text = accuracy.ToString () + "%";
-			if (levels.levelname.Contains ("1in1"))
-				lvl = 1;
-			else if (levels.levelname.Contains ("2in2"))
-				lvl = 2;
-			else if (levels.levelname.Contains ("3in1"))
-				lvl = 3;
-			else if (levels.levelname.Contains ("33in2"))
-				lvl = 4;
+			//StartCoroutine(stat(Login.user,lvl,curLevelScore));
+			//Debug.Log ("CurlevelScore: " + curLevelScore + "accuracy compered: " + accuracy);
+			if(curLevelScore < accuracy){
 			StartCoroutine(statisticUpdater(score, accuracy, lvl, Login.user));
-			if(once)
-			StartCoroutine (currentProgress (Login.user));
-			once = false;
-			if (curLevel == lvl  && curLevel != 4)
+			}
+			if (curLevel == lvl && curLevel != 4 && once) {
 				StartCoroutine (unlockLeveler (Login.user));
+				once = false;
+			}
 			//proScore.text = score;
-			//proAcc.text = accuracy;*/
+				//proAcc.text = accuracy;*/
+
 		}
 	
 
@@ -322,5 +328,16 @@ public class levelFrames : MonoBehaviour
 		WWW site = new WWW (levelUrl, form);
 		yield return site;
 		curLevel = int.Parse(site.text);
+	}
+	//getting levelStatistic
+	IEnumerator stat (string uname, int now)
+	{	
+		WWWForm form = new WWWForm ();
+		form.AddField ("usernamePost", uname);
+
+		WWW site = new WWW (statisticURL, form);
+		yield return site;
+		splitter = site.text.Split(char.Parse(","));
+		curLevelScore = int.Parse(splitter[now-1]);
 	}
 }
