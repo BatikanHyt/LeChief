@@ -49,7 +49,7 @@ public class levelFrames : MonoBehaviour
 	Controller controller;
 	Finger index;
 	Frame frame;
-	Text tScore;
+	//Text tScore;
 	int countBegining = 0;
 	int score = 1000;
 	//next page for statistic
@@ -66,6 +66,10 @@ public class levelFrames : MonoBehaviour
 	int curLevelScore;
 	private bool once = true;
 	private string [] splitter;
+	int GoodCount;
+	int totalLine;
+	private bool once1 = true;
+
 
 
 	// Use this for initialization
@@ -74,7 +78,7 @@ public class levelFrames : MonoBehaviour
 		foreach (Behaviour childCompnent in GameObject.Find("subpage2").GetComponentsInChildren<Behaviour>())
 			childCompnent.enabled = false;
 		StartCoroutine (currentProgress (Login.user));
-		Debug.Log ("hey current level is : " + curLevel);
+		//Debug.Log ("hey current level is : " + curLevel);
 		if (levels.levelname.Contains ("1in1"))
 			lvl = 1;
 		else if (levels.levelname.Contains ("2in2"))
@@ -89,9 +93,10 @@ public class levelFrames : MonoBehaviour
 		ff = GameObject.Find("ff");
 		t = GameObject.Find("t");
 		ball = GameObject.Find("ball");
-		tScore = GetComponent<Text>();
+		/*tScore = GetComponent<Text>();
 		tScore.fontSize = 30;
 		tScore.text = score.ToString();
+		*/
 		controller = new Controller();
 		index = new Finger();
 		line1 = theReader.ReadLine ();
@@ -113,6 +118,8 @@ public class levelFrames : MonoBehaviour
 			line1 = theReader.ReadLine();
 			line1 = theReader.ReadLine ();
 		}
+		totalLine = posList.Count;
+		Debug.Log ("total line is : " + totalLine);
 		ff.transform.position = posList[0];
 		t.transform.position = ff.transform.position;
 		pos = posList[posList.Count - 1];
@@ -150,6 +157,8 @@ public class levelFrames : MonoBehaviour
 				//ball.transform.position = t.transform.position;
 				//ball.transform.parent = t.transform;
 			}
+			//if (Mathf.Abs (distanceX) < 100 && Mathf.Abs (distanceY) < 100) {
+			//}
 			Vector3 fPos = new Vector3(appX, appY);
 			Plane objPlane = new Plane(Camera.main.transform.forward * -1, ball.transform.position);
 			Ray mRay = Camera.main.ScreenPointToRay(fPos);
@@ -162,7 +171,7 @@ public class levelFrames : MonoBehaviour
 				{
 
 					ball.transform.position = t.transform.position;
-
+					GoodCount++;
 				}
 
 			}
@@ -186,8 +195,8 @@ public class levelFrames : MonoBehaviour
 					move2 = false;
 				count += 1;
 				score = calculateScore(ballX, ballY, imageX, imageY, score);
-				accuracy = CalculateAccuracy(score);
-				tScore.text = score.ToString();
+				//------------------accuracy = CalculateAccuracy(score);
+				//tScore.text = score.ToString();
 				countBegining = 1;
 				if (Time.time - startTime > waitFor) {
 					Draw_t ();
@@ -195,12 +204,16 @@ public class levelFrames : MonoBehaviour
 				}
 			}
 		}else {
-			Debug.Log ("Bitti");
+			//Debug.Log ("Bitti");
 			foreach (Behaviour childCompnent in GameObject.Find("subpage2").GetComponentsInChildren<Behaviour>())
 				childCompnent.enabled = true;
-			proScore = GameObject.Find ("scoreShow").GetComponent<TextMeshProUGUI> ();
+			//proScore = GameObject.Find ("scoreShow").GetComponent<TextMeshProUGUI> ();
 			proAcc = GameObject.Find ("accShow").GetComponent<TextMeshProUGUI> ();
-			proScore.text = score.ToString ();
+			if (once1) {
+				accuracy = (int)((100*GoodCount)/(totalLine));
+				once1 = false;
+			}
+			//proScore.text = score.ToString ();
 			proAcc.text = accuracy.ToString () + "%";
 			//StartCoroutine(stat(Login.user,lvl,curLevelScore));
 			//Debug.Log ("CurlevelScore: " + curLevelScore + "accuracy compered: " + accuracy);
@@ -240,6 +253,7 @@ public class levelFrames : MonoBehaviour
 			// player.Play();
 			startPlaying = true;
 		}
+		Debug.Log ("Total Count is : " + (totalLine * 11.5));
 		Hand();
 		//if(moveCheck)
 		Draw();
@@ -294,12 +308,13 @@ public class levelFrames : MonoBehaviour
 
 		return result;
 	}
+	/*
 	public static int CalculateAccuracy(int score)
 	{
 		int temp = (score * 100) / 1000;
 		return temp;
 
-	}
+	}*/
 	IEnumerator statisticUpdater (int score, int accuracy, int level, string username){
 		WWWForm form = new WWWForm();
 		form.AddField("usernamePost", username);

@@ -55,9 +55,13 @@ public class frames : MonoBehaviour
 	int sayac = 0;
 	int lvl;
 	private string updateLevelUrl = "localhost/lechief/updateLevels.php";
-
+	int lineCount;
+	int goodCount;
+	bool once = true;
+	int remain;
+	int untilFinish;
 	private GameObject subpage2;
-	private TextMeshProUGUI proScore;
+	//private TextMeshProUGUI proScore;
 	private TextMeshProUGUI proAcc;
 	public void redirectToConductingPage(){
 		SceneManager.LoadScene ("Main2");
@@ -98,6 +102,7 @@ public class frames : MonoBehaviour
 			line1 = theReader.ReadLine();
 			line1 = theReader.ReadLine();
 		}
+		lineCount = posList.Count;
 		ff.transform.position = posList[0];
 		t.transform.position = ff.transform.position;
 		pos = posList[posList.Count - 1];
@@ -147,7 +152,7 @@ public class frames : MonoBehaviour
 				{
 
 					ball.transform.position = t.transform.position;
-
+					goodCount++;
 				}
 
 			}
@@ -166,14 +171,15 @@ public class frames : MonoBehaviour
 				Vector3 velocity = Vector3.zero;
 				//float smoothTime = 0.3F;
 				ff.transform.position = Vector3.MoveTowards (ff.transform.position, endpos, dist);
-				Debug.Log ("sorunlu kısım: " + ff.transform.position);
+				//Debug.Log ("sorunlu kısım: " + ff.transform.position);
 				if (ff.transform.position == pos)
 					move2 = false;
 				count += 1;
 				score = calculateScore (ballX, ballY, imageX, imageY, score);
-
-				tScore.text = score.ToString ();
-				print ("Score is " + score);
+				remain = 100 * count / lineCount;
+				untilFinish = 100 - remain;
+				tScore.text = "Remaining: " + untilFinish.ToString () + "%";
+				//print ("Score is " + score);
 				countBegining = 1;
 				Debug.Log ("sayac: "+sayac);
 				if (sayac > 30) {
@@ -186,11 +192,15 @@ public class frames : MonoBehaviour
 			Debug.Log ("Bitti");
 			foreach (Behaviour childCompnent in GameObject.Find("subpage2").GetComponentsInChildren<Behaviour>())
 				childCompnent.enabled = true;
-			proScore = GameObject.Find ("scoreShow").GetComponent<TextMeshProUGUI> ();
+			//proScore = GameObject.Find ("scoreShow").GetComponent<TextMeshProUGUI> ();
 			proAcc = GameObject.Find ("accShow").GetComponent<TextMeshProUGUI> ();
-			proScore.text = score.ToString ();
-			proAcc.text = accuracy.ToString () + "%";
-			StartCoroutine(statisticUpdater(score, accuracy, lvl, Login.user));
+			//proScore.text = score.ToString ();
+			if (once) {
+				accuracy = 100 * goodCount / lineCount;
+				proAcc.text = accuracy.ToString () + "%";
+				StartCoroutine (statisticUpdater (score, accuracy, lvl, Login.user));
+				once = false;
+			}
 		}
 	}
 
@@ -214,7 +224,8 @@ public class frames : MonoBehaviour
 		{
 			player.Play();
 			startPlaying = true;
-			accuracy = CalculateAccuracy(score);
+			//accuracy = CalculateAccuracy(score);
+
 		}
 		Hand();
 		//if(moveCheck)
@@ -270,12 +281,13 @@ public class frames : MonoBehaviour
 
 		return result;
 	}
+	/*
 	public static int CalculateAccuracy(int score)
 	{
 		int temp = (score * 100) / 1000;
 		return temp;
 
-	}
+	}*/
 	IEnumerator waitit(){
 		yield return new WaitForSeconds (3);
 	}
