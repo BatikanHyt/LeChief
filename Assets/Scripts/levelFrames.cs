@@ -62,13 +62,13 @@ public class levelFrames : MonoBehaviour
 	private string levelUrl = "localhost/lechief/levels.php";
 	private string statisticURL = "localhost/lechief/statistic.php";
 	int lvl;
-	private int curLevel;
+	int curLevel;
 	int curLevelScore;
-	private bool once = true;
+	private bool once;
 	private string [] splitter;
 	int GoodCount;
 	int totalLine;
-	private bool once1 = true;
+	private bool once1;
 
 
 
@@ -78,7 +78,6 @@ public class levelFrames : MonoBehaviour
 		foreach (Behaviour childCompnent in GameObject.Find("subpage2").GetComponentsInChildren<Behaviour>())
 			childCompnent.enabled = false;
 		StartCoroutine (currentProgress (Login.user));
-		//Debug.Log ("hey current level is : " + curLevel);
 		if (levels.levelname.Contains ("1in1"))
 			lvl = 1;
 		else if (levels.levelname.Contains ("2in2"))
@@ -87,6 +86,10 @@ public class levelFrames : MonoBehaviour
 			lvl = 3;
 		else if (levels.levelname.Contains ("33in2"))
 			lvl = 4;
+		else if (levels.levelname.Contains ("4in2"))
+			lvl = 5;
+		once = true;
+		once1 = true;
 		StartCoroutine(stat(Login.user,lvl));
 		QualitySettings.vSyncCount = 0;
 		Application.targetFrameRate = 30;
@@ -119,7 +122,7 @@ public class levelFrames : MonoBehaviour
 			line1 = theReader.ReadLine ();
 		}
 		totalLine = posList.Count;
-		Debug.Log ("total line is : " + totalLine);
+		//Debug.Log ("total line is : " + totalLine);
 		ff.transform.position = posList[0];
 		t.transform.position = ff.transform.position;
 		pos = posList[posList.Count - 1];
@@ -212,7 +215,7 @@ public class levelFrames : MonoBehaviour
 			if (once1) {
 				accuracy = (int)((100*GoodCount)/(totalLine));
 				once1 = false;
-			}
+			
 			//proScore.text = score.ToString ();
 			proAcc.text = accuracy.ToString () + "%";
 			//StartCoroutine(stat(Login.user,lvl,curLevelScore));
@@ -220,10 +223,12 @@ public class levelFrames : MonoBehaviour
 			if(curLevelScore < accuracy){
 			StartCoroutine(statisticUpdater(score, accuracy, lvl, Login.user));
 			}
-			if (curLevel == lvl && curLevel != 4 && once) {
-				StartCoroutine (unlockLeveler (Login.user));
+				if (curLevel == lvl && once && curLevel != 5) {
+					Debug.Log ("Current level : " + curLevel + " lvl param is: " + lvl);
+					StartCoroutine (unlockLeveler (Login.user,curLevel+1));
+					Debug.Log ("Currently online user: " + Login.user + "After curlevel : " + curLevel + "lvl is : " + lvl);
 				once = false;
-			}
+			}}
 			//proScore.text = score;
 				//proAcc.text = accuracy;*/
 
@@ -253,7 +258,7 @@ public class levelFrames : MonoBehaviour
 			// player.Play();
 			startPlaying = true;
 		}
-		Debug.Log ("Total Count is : " + (totalLine * 11.5));
+		//Debug.Log ("Total Count is : " + (totalLine * 11.5));
 		Hand();
 		//if(moveCheck)
 		Draw();
@@ -327,9 +332,10 @@ public class levelFrames : MonoBehaviour
 
 	}
 	//update the level
-	IEnumerator unlockLeveler(string username){
+	IEnumerator unlockLeveler(string username, int svy){
 		WWWForm form = new WWWForm();
 		form.AddField("usernamePost", username);
+		form.AddField ("levelPost", svy);
 		WWW site = new WWW (unlockLevelUrl, form);
 		yield return site;
 		Debug.Log (site.text);
@@ -343,6 +349,7 @@ public class levelFrames : MonoBehaviour
 		WWW site = new WWW (levelUrl, form);
 		yield return site;
 		curLevel = int.Parse(site.text);
+		Debug.Log ("curLevel is : " + curLevel);
 	}
 	//getting levelStatistic
 	IEnumerator stat (string uname, int now)

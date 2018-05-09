@@ -11,25 +11,25 @@ public class levels : MonoBehaviour {
 	public Button button3;
 	public Button button4;
 	public Button button5;
-	public Button button6;
+	/*public Button button6;
 	public Button button7;
 	public Button button8;
-	public Button button9;
+	public Button button9;*/
 	public Image level2lock;
 	public Image level3lock;
 	public Image level4lock;
 	public Image level5lock;
-	public Image level6lock;
+	/*public Image level6lock;
 	public Image level7lock;
 	public Image level8lock;
-	public Image level9lock;
+	public Image level9lock;*/
 
 	private int level1star;
 	private string [] splitter;
 	private string levelUrl = "localhost/lechief/levels.php";
 	private string levelstatUrl = "localhost/lechief/statistic.php";
 	private string curLevel;
-	public static int currentLevel;
+	//public static int currentLevel;
 	public void mainMenu(){
 		SceneManager.LoadScene ("main");
 	}
@@ -53,6 +53,26 @@ public class levels : MonoBehaviour {
 		levelname = "metronom/33in2.txt";
 		SceneManager.LoadScene ("drawer");
 	}
+	public void level5(){
+		levelname = "metronom/4in2.txt";
+		SceneManager.LoadScene ("drawer");
+	}/*
+	public void level6(){
+		levelname = "metronom/33in2.txt";
+		SceneManager.LoadScene ("drawer");
+	}
+	public void level7(){
+		levelname = "metronom/33in2.txt";
+		SceneManager.LoadScene ("drawer");
+	}
+	public void level8(){
+		levelname = "metronom/33in2.txt";
+		SceneManager.LoadScene ("drawer");
+	}
+	public void level9(){
+		levelname = "metronom/33in2.txt";
+		SceneManager.LoadScene ("drawer");
+	}*/
 	// Use this for initialization
 	void Start () {
 		StartCoroutine(currentProgress (Login.user));
@@ -72,44 +92,44 @@ public class levels : MonoBehaviour {
 		curLevel = site.text;
 		Debug.Log ("Current level is : " + curLevel +"\n");
 		if (curLevel.Contains ("1")) {
-			currentLevel = 1;
+			//currentLevel = 1;
 			button2.GetComponent<Button>().interactable = false;
 			button3.GetComponent<Button>().interactable = false;
 			button4.GetComponent<Button>().interactable = false;
 			button5.GetComponent<Button>().interactable = false;
-			button6.GetComponent<Button>().interactable = false;
+			/*button6.GetComponent<Button>().interactable = false;
 			button7.GetComponent<Button>().interactable = false;
 			button8.GetComponent<Button>().interactable = false;
-			button9.GetComponent<Button>().interactable = false;
+			button9.GetComponent<Button>().interactable = false;*/
 		} 
 		else if (curLevel.Contains ("2")) {
-			currentLevel = 2;
+			//currentLevel = 2;
 			level2lock.enabled = false;
 			button2.GetComponent<Button>().interactable = true;
 			button3.GetComponent<Button>().interactable = false;
 			button4.GetComponent<Button>().interactable = false;
 			button5.GetComponent<Button>().interactable = false;
-			button6.GetComponent<Button>().interactable = false;
+		/*	button6.GetComponent<Button>().interactable = false;
 			button7.GetComponent<Button>().interactable = false;
 			button8.GetComponent<Button>().interactable = false;
-			button9.GetComponent<Button>().interactable = false;
+			button9.GetComponent<Button>().interactable = false;*/
 
 		}
 		else if (curLevel.Contains ("3")) {
-			currentLevel = 3;
+			//currentLevel = 3;
 			level2lock.enabled = false;
 			level3lock.enabled = false;
 			button2.GetComponent<Button>().interactable = true;
 			button3.GetComponent<Button>().interactable = true;
 			button4.GetComponent<Button>().interactable = false;
 			button5.GetComponent<Button>().interactable = false;
-			button6.GetComponent<Button>().interactable = false;
+			/*button6.GetComponent<Button>().interactable = false;
 			button7.GetComponent<Button>().interactable = false;
 			button8.GetComponent<Button>().interactable = false;
-			button9.GetComponent<Button>().interactable = false;
+			button9.GetComponent<Button>().interactable = false;*/
 		}
 		else if (curLevel.Contains ("4")) {
-			currentLevel = 4;
+			//currentLevel = 4;
 			level2lock.enabled = false;
 			level3lock.enabled = false;
 			level4lock.enabled = false;
@@ -117,30 +137,40 @@ public class levels : MonoBehaviour {
 			button3.GetComponent<Button>().interactable = true;
 			button4.GetComponent<Button>().interactable = true;
 			button5.GetComponent<Button>().interactable = false;
-			button6.GetComponent<Button>().interactable = false;
+			/*button6.GetComponent<Button>().interactable = false;
 			button7.GetComponent<Button>().interactable = false;
 			button8.GetComponent<Button>().interactable = false;
-			button9.GetComponent<Button>().interactable = false;
+			button9.GetComponent<Button>().interactable = false;*/
 		}
 		else if (curLevel.Contains ("5")) {
-			currentLevel = 4;
+			//currentLevel = 5;
 			level2lock.enabled = false;
 			level3lock.enabled = false;
 			level4lock.enabled = false;
+			level5lock.enabled = false;
+			//level6lock.enabled = true;
+			//level7lock.enabled = true;
+			//level8lock.enabled = true;
+			//level9lock.enabled = true;
 			button2.GetComponent<Button>().interactable = true;
 			button3.GetComponent<Button>().interactable = true;
 			button4.GetComponent<Button>().interactable = true;
 			button5.GetComponent<Button>().interactable = true;
-			button7.GetComponent<Button>().interactable = false;
+			/*button7.GetComponent<Button>().interactable = false;
 			button8.GetComponent<Button>().interactable = false;
-			button9.GetComponent<Button>().interactable = false;
+			button9.GetComponent<Button>().interactable = false;*/
 
-		}
+		}/*
 		else if (curLevel.Contains ("6")) {
-			currentLevel = 4;
+			currentLevel = 6;
 			level2lock.enabled = false;
 			level3lock.enabled = false;
 			level4lock.enabled = false;
+			level5lock.enabled = false;
+			level6lock.enabled = false;
+			//level7lock.enabled = true;
+			//level8lock.enabled = true;
+			//level9lock.enabled = true;;
 			button2.GetComponent<Button>().interactable = true;
 			button3.GetComponent<Button>().interactable = true;
 			button4.GetComponent<Button>().interactable = true;
@@ -151,10 +181,15 @@ public class levels : MonoBehaviour {
 			button9.GetComponent<Button>().interactable = false;
 		}
 		else if (curLevel.Contains ("7")) {
-			currentLevel = 4;
+			currentLevel = 7;
 			level2lock.enabled = false;
 			level3lock.enabled = false;
 			level4lock.enabled = false;
+			level5lock.enabled = false;
+			level6lock.enabled = false;
+			level7lock.enabled = false;
+			//level8lock.enabled = true;
+			//level9lock.enabled = true;
 			button2.GetComponent<Button>().interactable = true;
 			button3.GetComponent<Button>().interactable = true;
 			button4.GetComponent<Button>().interactable = true;
@@ -165,10 +200,15 @@ public class levels : MonoBehaviour {
 			button9.GetComponent<Button>().interactable = false;
 		}
 		else if (curLevel.Contains ("8")) {
-			currentLevel = 4;
+			currentLevel = 8;
 			level2lock.enabled = false;
 			level3lock.enabled = false;
 			level4lock.enabled = false;
+			level5lock.enabled = false;
+			level6lock.enabled = false;
+			level7lock.enabled = false;
+			level8lock.enabled = false;
+			level9lock.enabled = true;
 			button2.GetComponent<Button>().interactable = true;
 			button3.GetComponent<Button>().interactable = true;
 			button4.GetComponent<Button>().interactable = true;
@@ -180,10 +220,15 @@ public class levels : MonoBehaviour {
 			button9.GetComponent<Button>().interactable = false;
 		}
 		else if (curLevel.Contains ("9")) {
-			currentLevel = 4;
+			currentLevel = 9;
 			level2lock.enabled = false;
 			level3lock.enabled = false;
 			level4lock.enabled = false;
+			level5lock.enabled = false;
+			level6lock.enabled = false;
+			level7lock.enabled = false;
+			level8lock.enabled = false;
+			level9lock.enabled = false;
 			button2.GetComponent<Button>().interactable = true;
 			button3.GetComponent<Button>().interactable = true;
 			button4.GetComponent<Button>().interactable = true;
@@ -193,7 +238,7 @@ public class levels : MonoBehaviour {
 			button7.GetComponent<Button>().interactable = true;
 			button8.GetComponent<Button>().interactable = true;
 			button9.GetComponent<Button>().interactable = true;
-		}
+		}*/
 	}
 	IEnumerator levelStat(string uname){
 		WWWForm form = new WWWForm ();
@@ -270,7 +315,7 @@ public class levels : MonoBehaviour {
 			GameObject.Find("3star5").GetComponent<Image>().enabled = true;
 		else
 			GameObject.Find("empty5").GetComponent<Image>().enabled = true;
-
+		/*
 		//for level6
 		if(lvl6stat>0&&lvl6stat<=25)
 			GameObject.Find("0star6").GetComponent<Image>().enabled = true;
@@ -318,5 +363,6 @@ public class levels : MonoBehaviour {
 			GameObject.Find("3star9").GetComponent<Image>().enabled = true;
 		else
 			GameObject.Find("empty9").GetComponent<Image>().enabled = true;
+		*/
 	}
 }
