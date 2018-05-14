@@ -215,25 +215,25 @@ public class levelFrames : MonoBehaviour
 			if (once1) {
 				accuracy = (int)((100*GoodCount)/(totalLine));
 				once1 = false;
-			
-			//proScore.text = score.ToString ();
-			proAcc.text = accuracy.ToString () + "%";
-			//StartCoroutine(stat(Login.user,lvl,curLevelScore));
-			//Debug.Log ("CurlevelScore: " + curLevelScore + "accuracy compered: " + accuracy);
-			if(curLevelScore < accuracy){
-			StartCoroutine(statisticUpdater(score, accuracy, lvl, Login.user));
-			}
+
+				//proScore.text = score.ToString ();
+				proAcc.text = accuracy.ToString () + "%";
+				//StartCoroutine(stat(Login.user,lvl,curLevelScore));
+				//Debug.Log ("CurlevelScore: " + curLevelScore + "accuracy compered: " + accuracy);
+				if(curLevelScore < accuracy){
+					StartCoroutine(statisticUpdater(score, accuracy, lvl, Login.user));
+				}
 				if (curLevel == lvl && once && curLevel != 5) {
 					Debug.Log ("Current level : " + curLevel + " lvl param is: " + lvl);
 					StartCoroutine (unlockLeveler (Login.user,curLevel+1));
 					Debug.Log ("Currently online user: " + Login.user + "After curlevel : " + curLevel + "lvl is : " + lvl);
-				once = false;
-			}}
+					once = false;
+				}}
 			//proScore.text = score;
-				//proAcc.text = accuracy;*/
+			//proAcc.text = accuracy;*/
 
 		}
-	
+
 
 	}
 
@@ -318,7 +318,6 @@ public class levelFrames : MonoBehaviour
 	{
 		int temp = (score * 100) / 1000;
 		return temp;
-
 	}*/
 	IEnumerator statisticUpdater (int score, int accuracy, int level, string username){
 		WWWForm form = new WWWForm();

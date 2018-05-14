@@ -11,6 +11,7 @@ public class settingsmenu : MonoBehaviour {
 	public InputField passnew;
 	public InputField passre;
 	public Text invalid;
+	public Slider vol;
 	private string Spass;
 	private string Spassnew;
 	private string Spassre;
@@ -79,10 +80,17 @@ public class settingsmenu : MonoBehaviour {
 	}
 
 	public void SetVolume (float volume){
-		audioMixer.SetFloat ("volume", volume);
+		//audioMixer.SetFloat ("volume", volume);
+		PlayerPrefs.SetFloat("volume",volume);
+		AudioListener.volume = PlayerPrefs.GetFloat("volume");
+		vol.value =  PlayerPrefs.GetFloat("volume");
+
 	}
 	public void SetFullScreen(bool isFullScreen){
 		Screen.fullScreen = isFullScreen;
+	}
+	void Aweke(){
+		DontDestroyOnLoad (vol);
 	}
 	IEnumerator changePassword(string username, string pass, string newpass){
 		WWWForm form = new WWWForm();
@@ -95,4 +103,5 @@ public class settingsmenu : MonoBehaviour {
 		//Debug.Log ("Serverdan gelen : " + site.text);
 		invalid.text = site.text;
 	}
+
 }

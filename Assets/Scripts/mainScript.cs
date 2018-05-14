@@ -20,7 +20,8 @@ public class mainScript : MonoBehaviour {
 		SceneManager.LoadScene ("Settings");
 	}
 	public void quit(){
-		Application.Quit ();
+		//Application.Quit ();
+		SceneManager.LoadScene("Login");
 	}
 	// Use this for initialization
 	void Start () {

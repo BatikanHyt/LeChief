@@ -38,6 +38,7 @@ public class conductpage : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start () {
+		AudioListener.volume = PlayerPrefs.GetFloat ("volume");
 	}
 	
 	// Update is called once per frame
